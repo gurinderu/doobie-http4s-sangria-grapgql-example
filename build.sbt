@@ -88,6 +88,7 @@ lazy val doobie_sangria = project.in(file("."))
 lazy val core = project
   .in(file("modules/core"))
   .enablePlugins(AutomateHeaderPlugin)
+  .enablePlugins(GraalVMNativeImagePlugin)
   .settings(commonSettings)
   .settings(
     name := "doobie-sangria-core",
@@ -108,5 +109,13 @@ lazy val core = project
       "io.circe"             %% "circe-optics"        % circeVersion,
       "io.chrisdavenport"    %% "log4cats-slf4j"      % log4catsVersion,
       "org.slf4j"            %  "slf4j-simple"        % slf4jVersion,
+    ),
+    graalVMNativeImageOptions := Seq(
+      "--enable-http",
+      "--enable-https",
+      "--enable-url-protocols=http,https",
+      "--enable-all-security-services",
+      "-H:ConfigurationFileDirectories=$resourceDirectory/graal",
+      "-H:+ReportUnsupportedElementsAtRuntime"
     )
   )
