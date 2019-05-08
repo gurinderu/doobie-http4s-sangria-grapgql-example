@@ -25,3 +25,13 @@ When you're done, ^C to kill the Scala server and
     docker-compose down
 
 to shut down the database.
+
+To download a native-image tool just run (now works only for macos)
+
+    source download-graalvm
+
+To build image run
+
+    sbt 'show graalvm-native-image:packageBin'
+   
+   

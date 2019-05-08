@@ -1,14 +1,14 @@
-lazy val catsEffectVersion    = "1.1.0"
-lazy val catsVersion          = "1.5.0"
-lazy val circeVersion         = "0.10.0"
+lazy val catsEffectVersion    = "1.2.0"
+lazy val catsVersion          = "1.6.0"
+lazy val circeVersion         = "0.11.0"
 lazy val doobieVersion        = "0.6.0"
-lazy val fs2Version           = "1.0.2"
-lazy val kindProjectorVersion = "0.9.9"
-lazy val log4catsVersion      = "0.2.0"
+lazy val fs2Version           = "1.0.4"
+lazy val kindProjectorVersion = "0.9.10"
+lazy val log4catsVersion      = "0.3.0"
 lazy val sangriaCirceVersion  = "1.2.1"
 lazy val sangriaVersion       = "1.4.2"
 lazy val scala12Version       = "2.12.8"
-lazy val http4sVersion        = "0.20.0-M4"
+lazy val http4sVersion        = "0.20.0"
 lazy val slf4jVersion         = "1.7.25"
 
 lazy val scalacSettings = Seq(
@@ -116,6 +116,9 @@ lazy val core = project
       "--enable-url-protocols=http,https",
       "--enable-all-security-services",
       "-H:ConfigurationFileDirectories=$resourceDirectory/graal",
-      "-H:+ReportUnsupportedElementsAtRuntime"
+      "-H:+ReportExceptionStackTraces",
+      "--allow-incomplete-classpath",
+      "--initialize-at-build-time=org.postgresql.Driver",
+      "--initialize-at-build-time=org.postgresql.util.SharedTimer"
     )
   )

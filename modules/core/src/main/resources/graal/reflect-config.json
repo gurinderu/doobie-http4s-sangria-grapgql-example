@@ -210,6 +210,10 @@
   "name":"java.util.Set"
 },
 {
+  "name":"java.util.TimeZone",
+  "fields":[{"name":"defaultTimeZone"}]
+},
+{
   "name":"org.http4s.parser.HttpHeaderParser$",
   "allPublicMethods":true
 },

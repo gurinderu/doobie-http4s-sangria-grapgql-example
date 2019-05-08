@@ -1,11 +1,19 @@
 #!/bin/bash
 # Make GraalVM `native-image` available and nothing else
-GRAALVM_VERSION=1.0.0-rc16
-GRAALVM_DISTRIBUTION=graalvm-ce-${GRAALVM_VERSION}
+GRAALVM_VERSION=19.0.0
 GRAALVM_PARENT_DIRECTORY=${HOME}/.local/share
 GRAAL_DIRECTORY=${GRAALVM_PARENT_DIRECTORY}/${GRAALVM_DISTRIBUTION}
-TAR_GZ_FILENAME=${GRAALVM_DISTRIBUTION}-macos-amd64.tar.gz
+case $(uname | tr '[:upper:]' '[:lower:]') in
+  linux*)
+    export OS_NAME=linux
+    ;;
+  darwin*)
+    export OS_NAME=darwin
+    ;;
+esac
+TAR_GZ_FILENAME=graalvm-ce-${OS_NAME}-amd64-${GRAALVM_VERSION}.tar.gz
 TAR_GZ_URL=https://github.com/oracle/graal/releases/download/vm-${GRAALVM_VERSION}/${TAR_GZ_FILENAME}
+${GRAAL_DIRECTORY}/Contents/Home/bin/gu install native-image
 NATIVE_IMAGE=${GRAAL_DIRECTORY}/Contents/Home/bin/native-image
 NATIVE_IMAGE_TARGET_DIRECTORY=${HOME}/.local/bin
 NATIVE_IMAGE_TARGET=${NATIVE_IMAGE_TARGET_DIRECTORY}/native-image
